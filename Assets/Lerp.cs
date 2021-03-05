@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Lerp : MonoBehaviour
 {
-    public Transform LerpPos;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //джедайские техники по сокрытию
+    [SerializeField]//поле будет в инспекторе, но из класса торчать не будет. Сокрытие - добро)
+    private Transform LerpPos;
 
-    // Update is called once per frame
+    [SerializeField]
+    private float speed;
+
     void Update()
     {
-        this.transform.position = Vector3.Lerp(this.transform.position, LerpPos.position, 0.01f );
+        var interpolate = Vector3.Lerp(this.transform.position, LerpPos.position, speed*Time.deltaTime);
+        interpolate.z = this.transform.position.z;
+        this.transform.position = interpolate;
     }
 }
